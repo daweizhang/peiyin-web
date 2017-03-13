@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 动态请求 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<!-- 处理乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 设置文件上传的大小 -->
+
+	<package name="isad" namespace="/" extends="theheadclass">
+		<!-- 管理操作 -->
+		<action name="isadlogin" class="voice.com.isad.action.AisadminAction">
+			<!-- 重定向到管理后台index初始化方法....报错可以忽略 -->
+			<result name="isadhaed" type="redirectAction">isadlogin!peiyinHeadInit.action
+			</result>
+			<!-- 转发到管理员登录 -->
+			<result name="isadlogin">htgl/usercontrol/adminlogin.jsp</result>
+			<!-- 转发到管理员登录 jsp页面 -->
+			<result name="toisadhaed">htgl/usercontrol/peiyinhead.jsp</result>
+
+			<result name="inuserlist">htgl/usercontrol/inuserlist.jsp</result>
+
+			<result name="editAdmin">htgl/usercontrol/edit.jsp</result>
+		</action>
+
+		<!-- 用户列表 -->
+		<action name="userlist" class="voice.com.isad.action.BmUserAction"
+			method="inUserlist">
+			<result name="inusers">htgl/Inuser/Inuserlist.jsp</result>
+		</action>
+		<!-- 用户资料 -->
+		<action name="inUserupdat" class="voice.com.isad.action.BmUserAction"
+			method="finduserids">
+			<result name="Inuserupdas">htgl/Inuser/Inuserupadt.jsp</result>
+			<result name="Inuserupdasrwf">htgl/Inuser/Inuserupadtrwf.jsp</result>
+		</action>
+
+		<!-- 任务列表 -->
+		<action name="tasksandton" class="voice.com.isad.action.TasksandworksAction"
+			method="tasksandlist">
+			<result name="tasksand">htgl/tasksandworks/tasklist.jsp</result>
+		</action>
+		<!-- 任务详细 -->
+		<action name="taskupdates" class="voice.com.isad.action.TasksandworksAction"
+			method="findtaksidsxz">
+			<result name="fintaksdate">htgl/tasksandworks/taksgwupadt.jsp</result>
+			<result name="fintaksdateguonei">htgl/tasksandworks/taksgnupadt.jsp</result>
+		</action>
+		<!-- 任务更新 -->
+		<action name="updatetaksdd" class="voice.com.isad.action.TasksandworksAction"
+			method="updatebfcs">
+			<result name="updatebf" type="json">1</result>
+		</action>
+
+		<!-- 作品列表 -->
+		<action name="workston" class="voice.com.isad.action.TasksandworksAction"
+			method="workslist">
+			<result name="findworks">htgl/tasksandworks/workslist.jsp</result>
+		</action>
+		<!-- 消息列表 -->
+		<action name="messtons" class="voice.com.isad.action.MessgeAction"
+			method="finmessgelist">
+			<result name="messgelist">htgl/news/messagelist.jsp</result>
+		</action>
+		<!-- 订单操作 -->
+		<action name="OrdersPending" class="voice.com.isad.action.OrdershtaiAction"
+			method="findOrdersPending">
+			<result name="OrdersPendings">htgl/orders/orderslist.jsp</result>
+		</action>
+		<!-- 待付款订单操作 -->
+		<action name="OrdersPendid" class="voice.com.isad.action.OrdershtaiAction">
+			<!-- 未付款进行审核 -->
+			<result name="findOders">htgl/orders/updatept.jsp</result>
+			<result name="updateorder" type="json">jsoner</result>
+			<!-- 已付款进行审核 -->
+			<result name="auditoders">htgl/orders/paidtoreview.jsp</result>
+		</action>
+		<!-- 已付款订单操作 -->
+		<action name="OrdersPendidadmin" class="voice.com.isad.action.OrdershtaiAction"
+			method="findPaymenthasbeenOders">
+			<result name="hasbeenOders">htgl/orders/alreadypayment.jsp</result>
+		</action>
+		<!-- 已付款订单操作 -->
+		<action name="finaloders" class="voice.com.isad.action.OrdershtaiAction"
+			method="fialsoders">
+			<result name="fainloders" type="json">jsoner</result>
+		</action>
+
+
+		<!-- 管理员进入聊天室 -->
+		<action name="startchatting" class="voice.com.isad.action.MessgeAction"
+			method="sendmessages">
+			<result name="sendmessags">htgl/froala_editor/message.jsp</result>
+		</action>
+		<!-- 删除聊天 -->
+		<action name="deletnews" class="voice.com.isad.action.MessgeAction"
+			method="deletmeges">
+			<result name="deleamges" type="chain">startchatting</result>
+		</action>
+
+		<!-- 查看用户消息 -->
+		<action name="findmessge" class="voice.com.isad.action.MessgeAction"
+			method="findmessgeslist">
+			<result name="findmesslist" type="json">mscn</result>
+		</action>
+
+		<!-- 客服点击发送消息 -->
+		<action name="ckliefsnews" class="voice.com.isad.action.MessgeAction"
+			method="customerservice">
+			<result name="cunctomrmess" type="json">mdts</result>
+		</action>
+
+		<!-- 动态查询现在中的记录数是否发生改变 -->
+		<action name="newxsajax" class="voice.com.isad.action.MessgeAction"
+			method="fingxszcount">
+			<result name="newxszcounts" type="json">count</result>
+		</action>
+
+		<!-- ajax动态查询用户消息列表 -->
+		<action name="newsduser" class="voice.com.isad.action.MessgeAction"
+			method="ajaxloadnews">
+			<result name="ajaxnewsusers" type="json">tpsd</result>
+		</action>
+
+		<!-- ajax动态查询被点击者的消息 -->
+		<action name="clikemessge" class="voice.com.isad.action.MessgeAction"
+			method="clikeusernews">
+			<result name="clikenewslist" type="json">clikcount</result>
+		</action>
+
+	</package>
+</struts>

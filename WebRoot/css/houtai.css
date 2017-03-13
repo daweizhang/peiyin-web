@@ -1,0 +1,28 @@
+#drop_icnsl{
+	-moz-border-radius: 100px;      /* Gecko browsers */
+   -webkit-border-radius: 100px;   /* Webkit browsers */
+   border-radius:100px;
+   overflow: hidden;
+}
+#skllmcks{
+	-moz-border-radius: 100px;      /* Gecko browsers */
+   -webkit-border-radius: 100px;   /* Webkit browsers */
+   border-radius:100px;
+   position:relative;
+   top:0px;
+   left: -10px;
+}
+#lougou_cl{
+	height: 35px;
+	width: 500px;
+	border:0px solid red;
+	position: absolute;
+	top: 0px;
+	left: 25px;
+}
+#login_zidu{
+	font-size: 28px;
+	font-weight: bold;
+	color: #FFF;
+	line-height:35px;
+}

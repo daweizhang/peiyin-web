@@ -1,0 +1,163 @@
+/*����Ա�б�չʾ������Ա��ϸҳ��*/
+#ccx_apy_li:hover{
+	font-weight:bold;
+}
+
+ 
+
+ 
+ 
+ /*----------------����Ա��ϸ---------------*/
+ #ail_xianxi1{width: 996px; height: 200px; border:1px solid #ccc;margin-top: 20px; }
+ #ail_tx1{width: 199px; height: 199px; border:0px solid #ccc;float:left;
+ text-align: center;}
+ #ail_tx2{width: 796px; height: 199px; border:0px solid #ccc;float:left;}
+ #ali_toux{margin-top:25px;border-radius:100px;}
+ #ail_cnx1{width: 600px; height: 170px; border:0px solid #ccc;float:left;
+ margin-top: 25px;}
+ #ail_cnx2{width: 170px; height: 170px; border:0px solid #ccc;float:left;
+ margin-top: 25px;}
+ 
+ #ail_xqqk2{width:580px; height: 30px; border:0px solid #ccc;}
+ #ail_xqqk1{width:580px; height: 25px; border:0px solid #ccc; margin-top: 3px;}
+ #xinfid_f{
+ font-family:"΢���ź�";
+ font-size: 18px;
+ font-weight: bold;
+ color: green;}
+ #beijtu_lnmf{
+     background-image:url(../images/icon-veri.gif);
+	 background-repeat:no-repeat;
+	 background-position:3px 2px;
+	 overflow:hidden;
+ }
+ 
+
+ 
+ #beijtu_lnmf1{
+     background-image:url(../images/icon-veri.gif);
+	 background-repeat:no-repeat;
+	 background-position:-16px 3px;
+	 overflow:hidden;
+ }
+ 
+ #beijtu_lnmf2{
+     background-image:url(../images/sms_bg.gif);
+	 background-repeat:no-repeat;
+	 background-position:-50px -76px;
+	 overflow:hidden;
+ }
+  
+ #ail_lic1{
+ float: left;
+ font-size: 13px;
+ color: #999;
+ list-style: none;}
+  
+ .ail_lic2{
+ float: left;
+ font-size: 13px;
+ color: #666;
+ list-style: none;
+ margin-left: 10px;}
+ 
+ #beijtu_lnmf5{
+     background-image:url(../images/icon_sprite.png);
+	 background-repeat:no-repeat;
+	 background-position:0px -52px;
+	 overflow:hidden;
+ } 
+ #ail_acc{
+ width: 100px;
+ height: 40px;
+ border:0px solid #690;
+ font-weight: bold;
+ color: #FFF;
+ line-height: 40px;/*#FFF;*/
+ -moz-border-radius: 10px;      /* Gecko browsers */
+   -webkit-border-radius: 10px;   /* Webkit browsers */
+   border-radius:10px;
+   background-color:#690; 
+}
+
+#ail_acc:hover{
+	   background-color:#6C0; 
+}
+
+
+
+
+#ali_zhutics{width: 999px; height: 600px; border:0px solid #ccc;margin-top: 10px;}
+#ali_zuoping1{width: 700px; height: 600px; border:0px solid #ccc; float: left;}
+#ali_zuoping2{width: 297px; height: 563px; border:1px solid #ccc; float: left;}
+
+
+#ali_zuioy1{width: 698px; height: 42px; border:1px solid #ccc;
+border-bottom: 1px dotted #ccc;
+border-width: 1px 0px 1px 1px;
+}
+#ali_zuioy2{width: 698px; border:1px solid #ccc;
+border-width: 0px 0px 0px 1px;
+}
+#ali_zuioy3{width: 699px; height: 40px; border:1px solid #ccc;}
+
+#beijtu_lnmf21{
+	background-image:url(../images/icon_sprite.png);
+	 background-repeat:no-repeat;
+	 background-position:-180px 5px;
+	 overflow:hidden;
+}
+
+#ali_xigs1{width: 295px; height: 40px; border:1px dotted #ccc;
+border-width: 0px 0px 1px 0px;
+margin-top: 2px;
+}
+img{
+	border: 0px;
+}
+#ali_xigs2
+{width: 293px; height: 220px; border:0px solid #ccc;}
+#ali_div_ke{
+	width: 80px; height:90px; border:0px solid red;
+	float: left;
+	margin-top: 14px;
+	margin-left: 13px;
+}
+#vblktup11{
+	border:2px solid #F2F2F2;
+	width: 75px;
+	height: 70px;
+}
+#vblktup11:hover{
+   border:2px solid #F90;
+}
+#lia_heri1{
+	font-size: 12px;
+	text-decoration: 0px;
+}
+#lia_heri1:hover{
+	text-decoration:inherit;
+	color: #F90;
+}
+#tab_lics1{
+	border: 2px solid #F2F2F2;
+}
+#tab_lics1:hover{
+	border: 2px solid #F90;
+}
+
+#xiangguan_cayu{
+	width: 295px; height: 40px; border:0px dotted #ccc;
+	border-width: 0px 0px 1px 0px;
+}
+#yaoqingkuang{position:fixed;top:40%;left:38%;width:452px;z-index:8889;background-color: #FFFFFF;border: 5px solid #F16700;overflow: hidden;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius:10px;z-index: 8889}
+.yaoqingkuang1{width:452px;height: 40px;line-height: 40px;padding-left: 10px;color: #666666;border-bottom: 1px solid #ccc;} 
+.yaoqingkuang2{width:452px;height: 100px;margin-top: 10px;}
+.yaoqingkuang21{width: 260px;margin-left: 35px;height: 30px;}
+.yaoqingkuang3{width:452px;height: 40px;}
+.yaoqingkuang31{width: 80px;height: 35px;line-height: 35px;float: right;text-align:center;margin-right: 40px;background-color:#669900;-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius:8px;color: #ffffff;}
+.yaoqingkuang32{width: 80px;height: 35px;line-height: 35px;float: right;text-align:center;margin-right: 40px;background-color:#F16700;-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius:8px;color: #ffffff;}
+
+ /*----------------����Ա��ϸ---------------*/
+ 
+ 

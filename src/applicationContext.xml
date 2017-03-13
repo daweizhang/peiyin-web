@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.2.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${driver}"></property>
+		  
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/voice?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"></property>
+		<property name="user" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		<!--  
+		<property name="jdbcUrl"
+			value="jdbc:mysql://peiyindb.cgay3vvfbwgt.us-west-2.rds.amazonaws.com:3306/voice?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"></property>
+		<property name="user" value="${user}"></property>
+		<property name="password" value="${password}"></property> -->
+		<property name="maxPoolSize" value="${maxPoolSize}"></property>
+		<property name="minPoolSize" value="${minPoolSize}"></property>
+		<property name="initialPoolSize" value="${initialPoolSize}"></property>
+		<property name="checkoutTimeout" value="${checkoutTimeout}"></property>
+		<property name="maxIdleTime" value="${maxIdleTime}"></property>
+	</bean>
+
+	<!-- 会话工厂 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider
+				</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+			</props>
+		</property>
+
+		<!-- 默认去读这个包下的类 -->
+		<property name="packagesToScan">
+			<list>
+				<value>voice.com.pojo</value>
+			</list>
+		</property>
+
+	</bean>
+	<!-- 定义模板对象 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate"
+		p:sessionFactory-ref="sessionFactory"></bean>
+
+	<!-- 手动注入用户类型Dao -->
+	<bean id="userTypeDao" class="voice.com.dao.impl.UserTypeDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="inUsersDao" class="voice.com.dao.impl.InUsersDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="lgtypeDao" class="voice.com.dao.impl.LgtypeDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="scrowdDao" class="voice.com.dao.impl.ScrowdDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="tvoiceDao" class="voice.com.dao.impl.TvoiceDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="aisadminDao" class="voice.com.dao.impl.AisadminDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="ysyleixDao" class="voice.com.dao.impl.YsyleixDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="worksDao" class="voice.com.dao.impl.WorksDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="btenderDao" class="voice.com.dao.impl.BtenderDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="fileormatDao" class="voice.com.dao.impl.FileormatDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="hspeedDao" class="voice.com.dao.impl.HspeedDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="partpateDao" class="voice.com.dao.impl.PartpateDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="xsystemnewsDao" class="voice.com.dao.impl.XsystemnewsDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="messgeDao" class="voice.com.dao.impl.MessgeDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="bftranslateDao" class="voice.com.dao.impl.BftranslateDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+	<bean id="ifehUsersDao" class="voice.com.dao.impl.IfehUsersDaoImpl"
+		p:hibernateTemplate-ref="hibernateTemplate">
+	</bean>
+
+
+
+
+	<!-- 手动注入用户类型Biz -->
+
+	<bean id="userTypeBiz" class="voice.com.biz.Impl.UserTypeBizImpl"
+		p:userTypeDao-ref="userTypeDao">
+	</bean>
+	<bean id="inUsersBiz" class="voice.com.biz.Impl.InUsersBizImpl"
+		p:inUsersDao-ref="inUsersDao">
+	</bean>
+	<bean id="lgtypeBiz" class="voice.com.biz.Impl.LgtypeBizImpl"
+		p:lgtypeDao-ref="lgtypeDao">
+	</bean>
+	<bean id="scrowdBiz" class="voice.com.biz.Impl.ScrowdBizImpl"
+		p:scrowdDao-ref="scrowdDao">
+	</bean>
+	<bean id="tvoiceBiz" class="voice.com.biz.Impl.TvoiceBizImpl"
+		p:tvoiceDao-ref="tvoiceDao">
+	</bean>
+	<bean id="aisadminBiz" class="voice.com.biz.Impl.AisadminBizImpl"
+		p:aisadminDao-ref="aisadminDao">
+	</bean>
+	<bean id="ysyleixBiz" class="voice.com.biz.Impl.YsyleixBizImpl"
+		p:ysyleixDao-ref="ysyleixDao">
+	</bean>
+	<bean id="worksBiz" class="voice.com.biz.Impl.WorksBizImpl"
+		p:worksDao-ref="worksDao">
+	</bean>
+	<bean id="btenderBiz" class="voice.com.biz.Impl.BtenderBizImpl"
+		p:btenderDao-ref="btenderDao">
+	</bean>
+	<bean id="fileormatBiz" class="voice.com.biz.Impl.FileormatBizImpl"
+		p:fileormatDao-ref="fileormatDao">
+	</bean>
+	<bean id="hspeedBiz" class="voice.com.biz.Impl.HspeedBizImpl"
+		p:hspeedDao-ref="hspeedDao">
+	</bean>
+	<bean id="partpateBiz" class="voice.com.biz.Impl.PartpateBizImpl"
+		p:partpateDao-ref="partpateDao">
+	</bean>
+	<bean id="xsystemnewsBiz" class="voice.com.biz.Impl.XsystemnewsBizImpl"
+		p:xsystemnewsDao-ref="xsystemnewsDao">
+	</bean>
+	<bean id="messgeBiz" class="voice.com.biz.Impl.MessgeBizImpl"
+		p:messgeDao-ref="messgeDao">
+	</bean>
+	<bean id="bftranslateBiz" class="voice.com.biz.Impl.BftranslateBizImpl"
+		p:bftranslateDao-ref="bftranslateDao">
+	</bean>
+	<bean id="ifehUsersBiz" class="voice.com.biz.Impl.IfehUsersBizImpl"
+		p:ifehUsersDao-ref="ifehUsersDao">
+	</bean>
+
+
+
+
+	<!--事物管理器 transactionManager默认的名 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory"></bean>
+	<!-- 事物要求 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="search*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="submit*" propagation="REQUIRED" />
+			<tx:method name="save*" rollback-for="Exception"
+				propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="marge*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="check*" propagation="REQUIRED" />
+			<tx:method name="do*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 事物织入 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* voice.com.biz.*.*(..))"
+			id="serviceMethod" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+	</aop:config>
+
+</beans>

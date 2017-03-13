@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+
+.scrolltext{background:url(../images/uuuu22.png) no-repeat;width:315px;height:480px;overflow:hidden auto 0 auto;
+
+background-position:-20px 0px;}
+.scrolltext ol li{width:313px;height:44px;font-size:13px;line-height:25px;border-bottom:2px solid #fff;
+border:1px solid #fff;}
+.scrolltext ol li:hover{
+	background-color: #FFC;
+    
+}
+#ccx_apy_l{
+	color: #620;
+}
+#ccx_apy_l:hover{
+	
+	color: red;
+}
+.scrolltext .part{width:313px; height:30px; margin-top:5px; background-color: #fff;}
+.scrolltext .part span{margin-left:30px;cursor:pointer;}
+#breakNews{padding:0 0 0px 0px; height:410px;}
+#breakNews .list6{height:410px;overflow:hidden;width:100%;}
+#li_lcadaohangds{width:315px; height:30px; border:0px dotted #990000;
+border-width:0px 0px 2px 0px;
+background:url(../images/yyrrss.png) no-repeat;}
+#zrziti{
+	font-size:16px;
+	text-align:center;
+	color:#660;
+	font-weight:bold;
+	font-family:"微软雅黑";
+	line-height:30px;}
+#tuanshangcz1{
+	margin-left:38px;
+	margin-top:10px;}
+#talecs1:hover{
+	border-color:#F60;
+	}
+	#talecs1{
+	border-color:#FFF;
+	}

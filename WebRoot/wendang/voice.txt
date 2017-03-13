@@ -1,0 +1,437 @@
+--备注记得在D盘建一个project文件夹
+use master
+go
+if exists(select * from sysdatabases where name='voice')
+	drop database voice
+go
+create database voice
+on primary
+(
+	name='voice_data',
+	filename='D:\project\voice_data.mdf',
+	size=5MB,
+	maxsize=100MB,
+	filegrowth=15%
+)
+log on
+(
+	name='voice_data_log',
+	filename='D:\project\voice_data_log.ldf',
+	size=2MB,
+	filegrowth=1MB
+)
+go
+use voice
+go
+
+
+
+
+--!---用户类型表------------------------------------------------------
+if exists(select * from sysobjects where name='D_type')
+   drop database D_type
+go
+create table D_type  --用户类型表
+( 
+        D_ID int not NULL identity(100,1) primary key,--用户类型ID
+        D_typeName nvarchar(50),--用户类型名称
+	D_TS nvarchar(50),     --备用字段
+ )      
+go
+--!------------------------------------------------------------------
+
+
+--!--------个人用户表--------------------------------------------------
+if exists(select * from sysobjects where name='InUsers')
+   drop database InUsers
+go
+create table InUsers
+(
+        I_ID int not NULL identity(10000,1) primary key,
+        I_UserName nvarchar(50) not NULL unique, --账号
+	I_Password nvarchar(50) not NULL, --用户密码
+	I_Name nvarchar(20), --昵称或姓名
+        I_Portrait nvarchar(200),--头像
+        I_Sex varchar(5),--性别
+        I_Birthday nvarchar(50),--出身年月
+        I_GName nvarchar(20), --公司名称 ---------配音员无该字段
+        I_GDetailed nvarchar(100),--公司详细地址---------配音员无该字段
+        I_GPerson nvarchar(20),--公司法人---------配音员无该字段
+        I_Email nvarchar(100) not NULL,--邮箱地址
+        I_Phone nvarchar(50),--手机号码
+        I_Region nvarchar(50),--国家地区
+        I_RedTime nvarchar(50) not NULL,--注册时间
+        I_LastTime nvarchar(50),--最后登录时间
+        I_LoginStatus int,--登录状态
+        I_Credibility int,--信誉度
+        I_Mxbi int,      --M虚拟币
+        I_crowd int,--人群阶段ID-----------任务方无该字段
+        I_LanguageLabels nvarchar(400),--语言类型标签-------------任务方无该字段
+        I_VoiceLabels nvarchar(400),--配音类型标签----------------任务方无该字段
+        I_slID varchar(400), --声音类型标签   -----------任务方无该字段
+        I_yhlxID int not NULL,--用户类型ID
+        I_TS nvarchar(50),--备用字段
+)
+go
+--!------------------------------------------------------------------
+
+
+
+
+
+
+
+--!---语言类型表------------------------------------------------------
+if exists(select * from sysobjects where name='L_gtype')
+   drop database L_gtype
+go
+create table L_gtype  --语言类型表
+( 
+        L_ID int not NULL identity(100,1) primary key,--语言类型ID
+        L_gtypeName nvarchar(50),--语言类型名称
+        L_TS nvarchar(50),--备用字段
+)
+go
+--!------------------------------------------------------------------
+
+
+
+
+--!---人群阶段表-------------------------------------------------------
+if exists(select * from sysobjects where name='S_crowd')
+   drop database S_crowd --人群阶段表
+go
+create table S_crowd
+(
+        S_ID int not NULL identity(100,1) primary key,--人群ID
+        S_crowdName nvarchar(100) not null,--人群名称
+        S_TS nvarchar(50),--备用字段
+)
+go
+
+
+
+
+
+--!---配音类型表------------------------------------------------------
+if exists(select * from sysobjects where name='T_voice')
+   drop database T_voice
+go
+create table T_voice  --配音类型表
+( 
+        T_vID int not NULL identity(100,1) primary key,--配音类型ID
+        T_vtypeName nvarchar(50),--配音类型名称
+        T_TS nvarchar(50),--备用字段
+)
+go
+--!------------------------------------------------------------------
+
+
+
+--!---声音类型表------------------------------------------------------
+if exists(select * from sysobjects where name='Y_syleix')
+   drop database Y_syleix
+go
+create table Y_syleix  --配音类型表
+( 
+        Y_slID int not NULL identity(100,1) primary key,--声音类型ID
+        Y_slName nvarchar(50),--声音类型名称
+        Y_TS nvarchar(50),--备用字段
+)
+go
+--!------------------------------------------------------------------
+
+
+
+--!---招标信息任务进度表------------------------------------------------------
+if exists(select * from sysobjects where name='Z_state')
+   drop database Z_state
+go
+create table Z_state  --招标信息状态表
+( 
+        Z_ID int not NULL identity(100,1) primary key,--招标信息状态ID
+        Z_basName nvarchar(50),--招标信息状态名称
+        Z_TS nvarchar(50),--备用字段    
+) 
+go
+--!------------------------------------------------------------------
+
+
+
+--!---任务信息表------------------------------------------------------
+if exists(select * from sysobjects where name='B_tender')
+   drop database B_tender
+go
+create table B_tender  --任务信息表
+( 
+        B_TID int not NULL identity(10000,1) primary key,--任务信息ID
+        B_TName nvarchar(50),     --任务信息标题
+        B_Time nvarchar(50),              --任务发布时间
+        B_UserID int,             --任务发布人ID
+        B_GtypeID int,            --任务语言类型ID
+        B_VoiceID int,            --任务配音类型ID
+        B_Ypfile nvarchar(300),   --任务音频文件（样音）
+        B_Sex varchar(5),                --任务要求性别(1是男  2是女)
+        B_CrowdID int,            --任务要求配音人群ID
+        B_TimeLength varchar(30), --任务要求配音时间长度
+        B_pygaowen nvarchar(500), --任务稿文
+        B_xxmiaoshu nvarchar(500),--任务要求详细描述
+        B_AsofTime nvarchar(50),          --任务截止时间
+        B_Price int,            --任务预算价位
+        B_stateID int,            --招标信息进度ID
+        B_liuyanNum int,          --浏览人数
+        B_TS nvarchar(50),        --备用字段  
+)   
+go
+--!------------------------------------------------------------------
+
+
+
+--!---竞标人作品表----------------------------------------------------
+if exists(select * from sysobjects where name='W_works')
+   drop database W_works
+go
+create table W_works  --竞标人作品表
+( 
+        W_ID int not NULL identity(100,1) primary key,--竞标人作品ID
+        W_worksName nvarchar(50),--竞标人作品名称
+        W_worksFile nvarchar(250),--音频文件
+        W_Time nvarchar(50),             --上传时间
+        W_UserID int,            --属于哪个人的ID
+        W_workScore int,         --作品评分  
+        W_xiebei varchar(5),            --性别(1是男  2是女)
+        W_renQunID int,          --人群类型ID
+        W_GtypeID int,           --语言类型ID
+        W_VoiceID int,           --配音类型ID
+        W_slID int,              --声音类型ID
+        W_liulanRs int,          --浏览人数 
+        W_TS nvarchar(50),       --备用字段
+)
+go
+--!------------------------------------------------------------------
+
+
+
+--!---竞标人完成状态表------------------------------------------------
+if exists(select * from sysobjects where name='C_omplete')
+   drop database C_omplete
+go
+create table C_omplete  --竞标人完成状态表
+( 
+        C_ID int not NULL identity(100,1) primary key,--竞标人完成状态ID
+        C_OmpName nvarchar(50),--竞标人完成状态名称
+        C_TS nvarchar(50),--备用字段
+     
+)
+go
+--!------------------------------------------------------------------
+
+
+--!---招标状态表------------------------------------------------
+if exists(select * from sysobjects where name='U_zbztb')
+   drop database U_zbztb
+go
+create table U_zbztb  --招标状态表
+( 
+        U_zbID int not NULL identity(100,1) primary key,--招标状态ID
+        U_zbName nvarchar(50),--招标状态名称
+        U_TS nvarchar(50),--备用字段
+     
+)
+go
+--!------------------------------------------------------------------
+
+
+--!---竞标人参与任务表 (邀请表多对多)------------------------------------------------
+if exists(select * from sysobjects where name='P_artpate')
+   drop database P_artpate
+go
+create table P_artpate  --竞标人参与任务表
+( 
+        P_ID int not NULL identity(100,1) primary key,--竞标人参与任务ID
+        P_UserID nvarchar(50),--竞标人(用户名)
+        P_UserSID nvarchar(50),--任务方(用户名)
+        P_TenderID int,--招标信息ID
+        P_CyTime nvarchar(50), --参与任务时间
+	P_WcTime nvarchar(50), --任务完成时间 
+        P_zbID int,    --招，竞标状态ID(竞标中，竞标成功，竞标失败)
+        P_omplete int,--完成状态ID(竞标成功后产生，进行中，已完成，失败)
+	P_pingfen int,--完成后的评分
+	P_vire nvarchar(500),--完成后提交的作品
+        P_TS nvarchar(50),--备用字段     
+)
+go
+
+
+
+
+
+
+-----------------以下是表之间的关系---------------------------------------------------
+--个人用户表
+alter table InUsers add
+   constraint FI_cID foreign key(I_crowd) references S_crowd(S_ID),--连配音要求人群表
+   constraint FI_yID foreign key(I_yhlxID) references D_type(D_ID)--连用户类型表
+go
+------------------------------------------------------------------------------------
+
+
+
+
+------------------------------------------------------------------------------------
+--招标信息表
+alter table B_tender add
+   constraint FkB_UID foreign key(B_UserID) references InUsers(I_ID),  --连用户表
+   constraint FkB_GID foreign key(B_GtypeID) references L_gtype(L_ID), --连语言类型表
+   constraint FkB_VID foreign key(B_VoiceID) references T_voice(T_vID),--连配音类型表
+   constraint FkB_CID foreign key(B_CrowdID) references S_crowd(S_ID), --连配音要求人群表
+   constraint FkB_sID foreign key(B_stateID) references Z_state(Z_ID)  --连招标信息进度表
+go
+------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------
+--作品表
+alter table W_works add
+   constraint Fkw_UID foreign key(W_UserID) references InUsers(I_ID),  --连用户表
+   constraint Fkw_GID foreign key(W_GtypeID) references L_gtype(L_ID), --连语言类型表
+   constraint Fkw_VID foreign key(W_VoiceID) references T_voice(T_vID),--连配音类型表
+   constraint Fkw_CID foreign key(W_renQunID) references S_crowd(S_ID),--连人群类型表
+   constraint Fkw_YID foreign key(W_slID) references Y_syleix(Y_slID) --连声音类型表
+go
+------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------
+--邀请表
+alter table P_artpate add
+   constraint FkP_TID foreign key(P_TenderID) references B_tender(B_TID), --连招标信息表
+   constraint Fkp_BID foreign key(P_zbID) references U_zbztb(U_zbID), --连招标状态表
+   constraint Fkp_ZID foreign key(P_omplete) references C_omplete(C_ID)  --连完成状态表
+go
+------------------------------------------------------------------------------------
+
+
+
+--用户类型表
+insert into D_type
+values('任务方','备用字段')
+insert into D_type
+values('配音员','备用字段')
+
+
+--语言类型表
+insert into L_gtype
+values('普通话','备用字段')
+insert into L_gtype
+values('粤语话','备用字段')
+insert into L_gtype
+values('重庆话','备用字段')
+insert into L_gtype
+values('其他话','备用字段')
+
+
+--人群阶段表
+insert into S_crowd
+values('儿童','备用字段')
+insert into S_crowd
+values('青年','备用字段')
+insert into S_crowd
+values('中年','备用字段')
+
+
+--配音类型阶段表
+insert into T_voice
+values('音乐配音','备用字段')
+insert into T_voice
+values('演讲配音','备用字段')
+insert into T_voice
+values('广告配音','备用字段')
+
+--任务进度表
+insert into Z_state
+values('发布中','备用字段')
+insert into Z_state
+values('未发布','备用字段')
+
+
+--邀请的招标状态表
+insert into U_zbztb
+values('竞标中','备用字段')
+insert into U_zbztb
+values('竞标成功','备用字段')
+insert into U_zbztb
+values('竞标失败','备用字段')
+
+
+--竞标人完成状态表
+insert into C_omplete
+values('合作中','备用字段')
+insert into C_omplete
+values('已完成','备用字段')
+
+
+--用户资料----任务方
+insert into InUsers
+values('admin','123456','陈超','login.jpg','男','1995/5/5','谷歌公司','美国纽约','陈超','969353498@.com','15213478863','中国北京','2016/5/21','2016/5/22',1,0,0,null,null,null,null,100,'备用字段')
+
+insert into InUsers
+values('accpccc','1cccccc','张三','login.jpg','女','1995/5/5','谷歌公司','美国纽约','陈超','969353498@.com','15213478863','中国北京','2016/5/21','2016/5/22',1,0,0,null,null,null,null,100,'备用字段')
+
+insert into InUsers
+values('accpcccxxx','1cccccc','李四','login.jpg','男','1995/5/5','谷歌公司','美国纽约','陈超','969353498@.com','15213478863','中国北京','2016/5/21','2016/5/22',1,0,0,null,null,null,null,100,'备用字段')
+
+
+--用户资料----配音员
+insert into InUsers
+values('adminddd','123456c','哈哈','login.jpg','男','1995/5/5',null,null,null,'969353498@.com','15213478863','中国北京','2016/5/21','2016/5/22',1,0,0,100,'普通话/四川话/东北话/','广告配音/文艺配音/演讲配音','磁性雄厚/优美文艺',101,'备用字段')
+
+insert into InUsers
+values('adminxx','123456ss','嘿嘿','login.jpg','女','1995/5/5',null,null,null,'969353498@.com','15213478863','中国北京','2016/5/21','2016/5/22',1,0,0,100,'普通话/四川话/东北话/','广告配音/文艺配音/演讲配音','磁性雄厚/优美文艺',101,'备用字段')
+
+insert into InUsers
+values('adminscs','123456z','嘻嘻','login.jpg','男','1995/5/5',null,null,null,'969353498@.com','15213478863','中国北京','2016/5/21','2016/5/22',1,0,0,100,'普通话/四川话/东北话/','广告配音/文艺配音/演讲配音','磁性雄厚/优美文艺',101,'备用字段')
+
+
+--任务表----
+insert into B_tender
+values('中国移动广告配音','2016/5/21',10000,100,100,'kjfs.mp3','男',100,'300','中国移动现在推出冲500话费送智能手机,走过路过千万不要错过','要求不要太快 差不多久行了','2016/5/25',58,100,0,null)
+
+insert into B_tender
+values('长城宽带广告配音','2016/5/21',10000,100,100,'kjfs.mp3','男',100,'300','中国移动现在推出冲500话费送智能手机,走过路过千万不要错过','要求不要太快 差不多久行了','2016/5/25',58,100,0,null)
+
+insert into B_tender
+values('淘宝商品广告配音','2016/5/21',10000,100,100,'kjfs.mp3','男',100,'300','中国移动现在推出冲500话费送智能手机,走过路过千万不要错过','要求不要太快 差不多久行了','2016/5/25',58,100,0,null)
+
+
+--声音类型表
+insert into Y_syleix
+values('雄厚磁性','备用字段')
+insert into Y_syleix
+values('大气高雅','备用字段')
+insert into Y_syleix
+values('优美文艺','备用字段')
+
+
+--作品表
+insert into W_works
+values('2分钟广告录音','jklsf.mp3','2016/5/21',10004,0,'男',100,100,100,100,0,null)
+insert into W_works
+values('测试广告录音','jklsf.mp3','2016/5/21',10004,0,'男',100,100,100,100,0,null)
+insert into W_works
+values('呵呵广告录音','jklsf.mp3','2016/5/21',10004,0,'男',100,100,100,100,0,null)
+
+
+--邀请表-----还未正式合作 由admin邀请了adminddd   adminxx   adminscs
+insert into P_artpate
+values('adminddd','admin',10000,'2016/5/21','2016/5/25',100,null,0,'fkjaln.mp3',null)
+insert into P_artpate
+values('adminxx','admin',10000,'2016/5/21','2016/5/25',100,null,0,'fkjaln.mp3',null)
+insert into P_artpate
+values('adminscs','admin',10000,'2016/5/21','2016/5/25',100,null,0,'fkjaln.mp3',null)
+--邀请表-----已经正式合作 最终选择了adminddd
+insert into P_artpate
+values('adminddd','admin',10000,'2016/5/21','2016/5/25',100,100,0,'fkjaln.mp3',null)
+

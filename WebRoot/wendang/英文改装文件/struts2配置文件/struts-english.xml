@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<!-- 动态请求 -->
+<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+<!-- 处理乱码 -->
+<constant name="struts.i18n.encoding" value="UTF-8" />
+ <package name="englishclass" namespace="/" extends="theheadclass">
+    
+    
+    <action name="indexenglish" class="voice.com.action.IndexAction" method="IndexfcEgl">
+ 		<result name="indexgs">indexeh.jsp</result>
+ 	</action>
+    
+    
+ 	<!-- 副页面跳转 -->
+        <action name="ehindexpage" class="voice.com.english.action.EhIndexAction">
+            <result name="logincons">Usereh/logineh.jsp</result>
+			<result name="jumpjylcs">pageeh/processeh.jsp</result>
+			<result name="jumpfyfks">pageeh/withpaymenteh.jsp</result>
+			<result name="jumpcjwts">pageeh/problemeh.jsp</result>
+			<result name="jumptsjys">pageeh/suggesteh.jsp</result>
+			<result name="jumpgywms">pageeh/aboutuseh.jsp</result>
+			<result name="Retrievepass">Usereh/backpaswrdeh.jsp</result>
+		</action>
+         
+         <action name="ehranking" class="voice.com.english.action.EhIndexAction" method="rankinglistsEh">
+            <!-- 进入排行榜 -->
+			<result name="rankinglist">pageeh/paihuangeh.jsp</result>
+         </action>
+
+        <!-- 进入聊天 -->
+       <action name="ehgochat" class="voice.com.english.action.EhUserehsMessgeAction" method="enterchatEh">
+         <result name="enterchats">Usereh/Userehmessageeh.jsp</result>
+       </action>
+        <!-- 用户发消息 -->
+       <action name="ehUserehsmessge" class="voice.com.english.action.EhUserehsMessgeAction" method="UserehsendmessagesEh">
+         <result name="Userehsendmessags" type="json">ms,newscont</result>
+       </action> 
+       <!-- ajax动态查询管理员消息 -->
+       <action name="ehnewsajax" class="voice.com.english.action.EhUserehsMessgeAction" method="ajaxnewsddEh">
+         <result name="ajaxnewsadm" type="json">conts</result>
+       </action> 
+
+      
+		<!-- 用户类操作 -->
+		<action name="ehloginUserehs" class="voice.com.english.action.EhUserehAction">
+			<result name="listUsetType">Usereh/registeredeh.jsp</result>
+			<result name="loginrequest">Usereh/logineh.jsp</result>
+			<result name="findyam" type="json">
+				<param name="includeProperties">
+					yanzm
+				</param>
+			</result>
+			<result name="requesyaz" type="json">
+				<param name="includeProperties">
+					zcbr
+				</param>
+			</result>
+			<result name="logincg" type="chain">indexenglish</result>
+			<result name="requestyhm" type="json">
+				<param name="includeProperties">
+					yamyhm
+				</param>
+			</result>
+			<!-- 注册返回的信息 -->
+			<result name="regerschgo">Usereh/soswooeh.jsp</result>
+			<!-- 找回密码验证 -->
+			<result name="rnlcsl">Usereh/backpaswrdeh.jsp</result>
+			<result name="tzxzfs">Usereh/youxiangzhaohuimimaeh.jsp</result>
+			<result name="txmimac">Usereh/szxingmimaeh.jsp</result>
+			<result name="toytis">Usereh/toyongtiseh.jsp</result>
+			<!-- 进入主页判断用户类型iUserehhomepageehpy -->
+			<result name="iUserehhomepageehrw">taskpartyeh/memberseh.jsp</result>
+			<result name="iUserehhomepageehpy">peiyingyuaneh/peiyingyuanehzuyeeh.jsp</result>
+			<!-- 主页修改密码 -->
+			<result name="updatepassmm" type="chain">ehpasswordups</result>
+			<result name="updatepassmms" type="chain">ehpasswordups</result>
+		</action>
+		
+		<!-- 进入主页修改密码 -->
+		<action name="ehpasswordups" class="voice.com.english.action.EhUserehAction" method="pageehupadpassEh">
+		  <result name="pageehpassword">peiyingyuaneh/xiugaimimaeh.jsp</result>
+		  <result name="pageehpasswordrwdfs">taskpartyeh/rwfupadatepaseh.jsp</result>
+		</action>
+		
+		
+		<!-- 是否公开 -->
+       <action name="ehpublicly" class="voice.com.english.action.EhUserehAction" method="publiclyUserehEh"> 
+          <result name="publiclyus" type="chain">ehpersonalcenter</result>
+       </action>
+
+		<!-- 登陆验证码 -->
+		<action name="ehrandom" class="voice.com.english.action.EhRandomAction"
+			method="executeEh">
+			<!--<result name="SUCCESS" type="stream"> <param name="contentType">image/jpeg</param> 
+				<param name="inputName">outputinages</param> </result> -->
+		</action>
+
+		<!-- 退出session -->
+		<action name="ehexitUsereh" class="voice.com.english.action.EhExitAction">
+			<result name="exit" type="chain">indexenglish</result>
+		</action>
+		<!-- 配音员的操作 -->
+		<action name="ehvoicemiets" class="voice.com.english.action.EhVoiceMaterialsAction">
+			
+			<result name="uerupload" type="chain">ehvoicfs</result>
+			<result name="uploadviceworks" type="chain">ehuplaodvoicezp</result>
+			<result name="updatewkzp" type="chain">ehworkszsid</result>
+			<result name="deleteworks" type="redirectAction">
+				<param name="actionName">ehworksgllist</param>
+				<param name="djydd">${djys}</param>
+			</result>
+		</action>
+		<!-- 个人中心 -->
+		<action name="ehpersonalcenter" class="voice.com.english.action.EhVoiceMaterialsAction" method="InvoicematerialEh">
+		  <result name="invoce">peiyingyuaneh/pyygerenzhongxineh.jsp</result>
+		  <result name="taskpary">taskpartyeh/personalcentereh.jsp</result>
+		</action>
+		
+		<!-- 进入上传头像 -->
+		<action name="ehvoicfs" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="fintouxEh">
+			<result name="Userehtx">peiyingyuaneh/pyyuploadtouxeh.jsp</result>
+			<result name="renwufang">taskpartyeh/uploadtouxeh.jsp</result>
+		</action>
+		<!-- 进入资料完善 -->
+		<action name="ehupUserehtion" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="updateUserehEh">
+			<result name="updateisUsereh">peiyingyuaneh/peiyinyuanjibenziliaoeh.jsp</result>
+			<result name="rwfcemtes">taskpartyeh/jibenzhiliaoeh.jsp</result>
+		</action>
+		<!-- 资料完善 -->
+		<action name="ehUserehupdate" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="updateUserehwszlEh">
+			<result name="wsvoiccemtes" type="chain">ehupUserehtion</result>
+		</action>
+		<!-- 进入上传作品页面 -->
+		<action name="ehuplaodvoicezp" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="uploadvicezpEh">
+			<result name="uplaodvicezps">peiyingyuaneh/shangcuanzuopingeh.jsp</result>
+		</action>
+		<!-- 进入作品管理 -->
+		<action name="ehworksgllist" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="workslistEh">
+			<result name="workslistcon">peiyingyuaneh/rwnulibiaoeh.jsp</result>
+			<result name="wklnjosn" type="json">
+				listw
+			</result>
+		</action>
+		<!-- 根据ID展示作品 -->
+		<action name="ehworkszsid" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="findworksEh">
+			<result name="findworksup">peiyingyuaneh/voicezpupdateeh.jsp</result>
+		</action>
+        <!-- 竞标中的任务列表 -->
+        <action name="ehvoiceBiddings" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="findBiddingEh">
+           <result name="voiceBidding">peiyingyuaneh/Biddingeh.jsp</result>
+        </action>
+        <!-- 已完成的任务订单列表 -->
+        <action name="ehodersovers" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="findOrderywcEh">
+           <result name="odersywc">peiyingyuaneh/havetheordereh.jsp</result>
+           <result name="odersrwf">taskpartyeh/rwfyiwanchenoderseh.jsp</result>
+        </action>
+        
+        
+        <!-- 删除竞标信息 -->
+        <action name="ehdelepartpates" class="voice.com.english.action.EhvoiceplayerbiddingAction">
+           <result name="deletepartpate" type="chain">ehvoiceBiddings</result>
+           <!-- 查看我的竞标消息 -->
+           <result name="viewbiddings">pageeh/biddinginformationeh.jsp</result>
+           <!-- 查看我竞标成功的任务的信息 -->
+           <result name="findthevoicedatas">pageeh/hvoicedataeh.jsp</result>
+           <!-- tijiaochanping -->
+           <result name="submitproduct">pageeh/submitproducteh.jsp</result>
+           <!-- 任务方删除待付款的订单 -->
+           <result name="deleterwfoders" type="chain">ehunpaidtaskorder</result>
+           <!-- 查看消息 -->
+           <result name="themessage">peiyingyuaneh/messagedetaileh.jsp</result>
+        </action>
+        <!-- 配音员提交成品-->
+        <action name="ehfinishedadmes" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="finishedproductEh">
+          <result name="finishedproducs">pageeh/tjsuccessfullyeh.jsp</result>
+        </action>
+        <!-- 配音员的系统消息 -->
+        <action name="ehUserehsystemnews" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="findsystemnewsEh">
+          <result name="systemnews">peiyingyuaneh/pyysystemmessageeh.jsp</result>
+          <result name="systemnewsrwfs">taskpartyeh/rwfmassgeseh.jsp</result>
+        </action>
+        
+        <!-- 任务方查看已付款的订单 -->
+        <action name="ehpaymenthasbeenrw" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="paymenthasbeenEh">
+           <result name="paymenthasbeens">taskpartyeh/thegoodseh.jsp</result>
+        </action>
+        <!-- 任务方进入我的邀请列表 -->
+        <action name="ehinvitat" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="invitationtobidEh">
+           <result name="invitationtob">pageeh/invitevoiceeh.jsp</result>
+        </action>
+        <!-- 点击邀请 -->
+        <action name="ehgoinvite" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="InvitationtobidsEh">
+           <result name="tiontobids">taskpartyeh/yaoqingchenggoneh.jsp</result>
+        </action>
+        <!-- 竞标成功的任务列表 -->
+        <action name="ehBidsuccess" class="voice.com.english.action.EhvoiceplayerbiddingAction" method="BidsuccessOrderEh">
+           <result name="Bidseccesoders">peiyingyuaneh/wonthebideh.jsp</result>
+        </action>
+        
+       
+        
+
+		<!-- 任务方============================================================== -->
+		<!-- 进入新增任务信息页面 -->
+		<action name="ehbtenderaction" class="voice.com.english.action.EhVoiceMaterialsAction"
+			method="enterBtenderyemEh">
+			<result name="btenderEnter">taskpartyeh/releaseeh.jsp</result>
+		</action>
+		<!-- 添加任务 -->
+		<action name="ehinsertbtender" class="voice.com.english.action.EhBtenderAction">
+			<result name="btenderInsert" type="redirectAction">
+				<param name="actionName">ehbtenderaction</param>
+			</result>
+		</action>
+
+
+		<action name="ehdownload" class="voice.com.english.action.EhDownloadAction">
+			<result name="success" type="stream">
+				<!-- 设定下载文件类型 -->
+				<param name="contentType">application/octet-stream;charset=iso-8859-1</param>
+				<!-- 设定下载文件名称 -->
+				<param name="contentDisposition">attachment;filename=${filename}</param>
+				<!-- 设定文件下载来源 -->
+				<param name="inputName">downloadFile</param>
+				<!-- 下载文件的缓冲大小 -->
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 进入我的任务列表 -->
+		<action name="ehbtenlist" class="voice.com.english.action.EhBtenderAction"
+			method="taskpartyehlistEh">
+			<result name="taskparttlistaction">taskpartyeh/thetasklisteh.jsp</result>
+			<result name="rewujson" type="json">
+				bten
+			</result>
+		</action>
+		<action name="ehbetenbj" class="voice.com.english.action.EhBtenderAction"
+			method="updatebtenEh">
+			<!-- 进入任务编辑 -->
+			<result name="upatebtens">taskpartyeh/taskdetaileh.jsp</result>
+		</action>
+
+
+		<action name="ehbetencaozuo" class="voice.com.english.action.EhBtenderAction">
+			<!-- 任务修改后 -->
+			<result name="updatebtenders" type="chain">ehbetenbj</result>
+			<!-- 任务删除 -->
+			<result name="deletebtes" type="redirectAction">
+				<param name="actionName">ehbtenlist</param>
+				<param name="rwdjys">${yema}</param>
+			</result>
+			<result name="jsonpartpate" type="json">
+				prlist
+			</result>
+		</action>
+
+
+		<!-- 配音员搜索页面 -->
+		<action name="ehvoiceyindex" class="voice.com.english.action.EhpageehAction"
+			method="thevoicefindEh">
+			<result name="thevoicelist">pageeh/thevoiceeh.jsp</result>
+			<result name="thevoicejson" type="json">
+				vlist
+			</result>
+		</action>
+
+		<!-- 配音员详细 -->
+		<action name="ehinsvoiw" class="voice.com.english.action.EhpageehAction"
+			method="inUserehvoiwEh">
+			<result name="inUserehvoiws">pageeh/pydetailedeh.jsp</result>
+		</action>
+		<!-- 任务详细 -->
+		<action name="ehvoiwtaskbt" class="voice.com.english.action.EhpageehAction"
+			method="voiwtaskEh">
+			<result name="viowtasks">pageeh/renwuxiangqingeh.jsp</result>
+		</action>
+
+		<!-- 作品搜索页面 -->
+		<action name="ehworksvoiw" class="voice.com.english.action.EhpageehAction"
+			method="viowlistEh">
+			<result name="vioworkslist">pageeh/zuopineh.jsp</result>
+			<result name="vioworksjson" type="json">
+				vowos
+			</result>
+		</action>
+		<!-- 作品详细 -->
+		<action name="ehworksdeta" class="voice.com.english.action.EhpageehAction"
+			method="worksdetailedsEh">
+			<result name="worksdetailed">pageeh/zuopinxxeh.jsp</result>
+		</action>
+
+		<!-- 任务搜索页面 -->
+		<action name="ehbtendervoiw" class="voice.com.english.action.EhpageehAction"
+			method="voiwbtenderlistEh">
+			<result name="voiwbtender">pageeh/renwuzhuyeeh.jsp</result>
+			<result name="voiwbtenderjson" type="json">
+				btenlist
+			</result>
+		</action>
+        
+        <!-- 任务订单确认 -->
+        <action name="ehConfirmation" class="voice.com.english.action.EhOrdersAction" method="orderConfirmationEh">
+           <result name="orderConfirmations">taskpartyeh/addPartpateeh.jsp</result>
+        </action>
+        <!-- 付款操作 -->
+        <action name="ehpaymento" class="voice.com.english.action.EhOrdersAction" method="paymentoperationEh">
+           <result name="paymentoperations">taskpartyeh/paywaitforeh.jsp</result>
+        </action>
+        <!-- 查询交易表的支付状态 -->
+		<action name="ehfindPaymens" class="voice.com.english.action.EhOrdersAction"
+			method="findPaymentstatusEh">
+			<result name="Paymentstatus" type="json">
+				zfid
+			</result>
+		</action>
+		<!-- 后台支付成功后页面自动跳转到成功页面 -->
+		<action name="ehpaymentsuccessts" class="voice.com.english.action.EhOrdersAction"
+			method="paymentsuccessfulEh">
+			<result name="paymentsuccess">taskpartyeh/payforsuccesseh.jsp</result>
+		</action>
+		
+		<!-- 进入任务方未支付订单页面 -->
+		<action name="ehunpaidtaskorder" class="voice.com.english.action.EhOrdersAction"
+			method="unpaidEh">
+			<result name="unpaidptedns">taskpartyeh/weifukuaneh.jsp</result>
+		</action>
+		<!-- 进入任务方已支付订单页面 -->
+		<action name="ehconJumptaskorder" class="voice.com.english.action.EhOrdersAction"
+			method="JumptaskorderEh">
+			<result name="Jumptaskorders">taskpartyeh/jinxinzhongeh.jsp</result>
+		</action>
+        
+        
+        
+        <!-- 参加竞标 -->
+       <action name="ehuplaodvofiles" class="voice.com.english.action.EhpageehAction" method="uploadsyinEh">
+          <result name="uploadjinbiao">pageeh/renwutishieh.jsp</result>
+       </action>
+     
+ </package> 
+</struts>

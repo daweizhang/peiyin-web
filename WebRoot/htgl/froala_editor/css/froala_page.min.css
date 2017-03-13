@@ -1,0 +1,94 @@
+/*!
+ * froala_editor v1.2.2 (http://editor.froala.com)
+ * Copyright 2014-2014 Froala
+ */.froala-element img.fr-fil,img.fr-tag.fr-fil{z-index:1;position:relative;vertical-align:top;display:block;margin:auto;overflow:auto;padding:10px 10px 10px 3px;float:left!important}.froala-element img.fr-fil.fr-tni,img.fr-tag.fr-fil.fr-tni{float:none!important;margin-left:0!important}.froala-element img.fr-fir,img.fr-tag.fr-fir{z-index:1;position:relative;vertical-align:top;display:block;margin:auto;overflow:auto;padding:10px 3px 10px 10px;float:right!important}.froala-element img.fr-fir.fr-tni,img.fr-tag.fr-fir.fr-tni{float:none!important;margin-right:0!important}.froala-element img.fr-fin,img.fr-tag.fr-fin{z-index:1;position:relative;vertical-align:top;display:block;margin:auto;overflow:auto;padding:10px 0;float:none}.froala-element a.fr-file,a.fr-file{position:relative}.froala-element a.fr-file:before,a.fr-file:before{position:relative;display:inline-block;font-family:FontAwesome;font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;content:"\f0c6";top:0;padding-right:3px}.froala-element hr,hr.fr-tag{height:0;border:0;border-top:solid 1px #ccc;clear:both}.froala-element pre,pre.fr-tag{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;border:solid 1px #ccc;background:#fcfcfc;padding:10px;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box}.froala-element blockquote,blockquote.fr-tag{margin-left:20px;margin-right:0;margin-top:0;padding-left:20px;position:relative;font-style:italic;border-left:solid 5px #ccc}.froala-element ul,.froala-element ol,ul.fr-tag,ol.fr-tag{padding-left:25px}.froala-element table,table.fr-tag{border-collapse:collapse;empty-cells:show;width:100%;margin-bottom:10px;margin-top:10px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.froala-element table td,table.fr-tag td{border:solid 1px #ccc;padding:5px}.froala-element p,p.fr-tag{margin:0 0 10px}.froala-element h1,h1[class=fr-tag]{font-size:36px;line-height:1.1;font-weight:400;margin-top:20px;margin-bottom:10px}.froala-element h2,h2[class=fr-tag]{font-size:30px;line-height:1.1;font-weight:400;margin-top:20px;margin-bottom:10px}.froala-element h3,h3[class=fr-tag]{font-size:24px;line-height:1.1;font-weight:400;margin-top:20px;margin-bottom:10px}.froala-element h4,h4[class=fr-tag]{font-size:18px;line-height:1.1;font-weight:400;margin-top:10px;margin-bottom:10px}.froala-element h5,h5[class=fr-tag]{font-size:14px;line-height:1.1;font-weight:400;margin-top:10px;margin-bottom:10px}.froala-element h6,h6[class=fr-tag]{font-size:12px;line-height:1.1;font-weight:400;margin-top:10px;margin-bottom:10px}.fr-fvn{float:none;display:block!important;text-align:center!important}.fr-fvl{float:left;margin:10px 10px 10px 1px}.fr-fvr{float:right;margin:10px 1px 10px 10px}
+ 
+ 
+
+
+ section {
+width: 595px;
+height:100px;
+margin-left:0px;
+
+}
+.froala-element{
+height:73px;}
+#seiverliatot{border:0px solid #ccc; height:700px; width:850px; margin:auto; background-color:#FFFBF0;font-family:"΢���ź�";}
+#zaixyonghu1{border:0px solid #ccc; height:696px; width:230px; float:left;}
+#zaixyonghu2{border:0px solid #ccc; height:696px; width:612px; float:left;}
+#sysdinds1{border:0px solid #ccc; height:40px; width:612px;border-width:0px 0px 0px 0px;}
+#sysdinds2{border:0px solid #ccc; height:450px; width:612px;border-width:0px 0px 0px 0px; overflow: auto; overflow-y:scroll;Y;
+background-image:url(../images/tubj1.png);
+background-repeat:no-repeat;}
+#sysdinds3{border:0px solid #ccc; height:200px; width:612px;border-width:0px 0px 2px 0px; }
+#usercount1{border:0px solid #ccc; height:180px; width:230px;border-width:0px 0px 4px 0px;}
+#usercount2{border:0px solid #ccc; height:30px; width:230px;border-width:0px 0px 4px 0px;}
+#usercount3{border:0px solid #ccc; height:480px; width:230px;border-width:0px 0px 0px 0px;overflow: auto; overflow-y:scroll;Y;}
+#userzhi1{border:0px solid #ccc; height:110px; width:110px; margin-left:58px;border-radius:100px; overflow:hidden;}
+#userzhi2{border:0px solid #ccc; height:30px; width:200px;margin-left:13px;}
+#userslist{ width:200px; height:105px; border:0px solid #ccc; margin-left:5px; margin-top:5px;}
+#userslist:hover{
+	border:0px solid #F60;
+	background-color:#D4DFAA;
+	opacity:0.8;}
+
+.lnlns{
+	background-color:#D4DFAA;
+	opacity:0.8;
+	}	
+	
+#newsjilu{border:0px solid #ccc; width:540px; float:left; margin-top:10px; margin-left:2px; margin-bottom:10px;}
+#news1{border:0px solid #ccc; width:50px; height:50px; float:left; border-radius:100px; overflow:hidden;}
+#news2{border:0px solid red; width:484px; float:left; border-radius:5px; margin-left:2px; background-color:#eee;}
+#news3{border:0px solid red; width:484px; float:left;  margin-left:2px; text-align:center;}
+#mansess{margin-left:7px; margin-top:5px; margin-right:5px; margin-bottom:5px;}
+#deletes{
+	width:14px;
+	height:14px;
+	border:0px solid #999;
+	border-radius:100px;
+	position:relative;
+	right:-480px;
+	top:20px;
+	text-align:center;
+	}
+#deletes1{
+	width:15px;
+	height:15px;
+	border:0px solid #999;
+	border-radius:100px;
+	position:relative;
+	top:20px;
+	right:15px;
+	text-align:center;
+	}	
+
+
+#xizyssl{
+	font-size:14px;}
+#fasongx{
+	border:0px solid red; width:596px; height:28px;
+	position:relative;
+	top:69px;
+	left:5px;
+	}
+	
+#fssubmt{
+	width:120px;
+	height:24px;
+	border:1px solid #ccc;
+	float:right;
+	margin-right:10px;
+	background-color:#D4DFFF;
+	margin-top:2px;}
+#fssubmt:hover{
+	border:0px solid red;
+	background-color:#f60;}
+#userids1{ width:190px; height:70px; border:0px solid red; margin-left:4px;}
+#userids2{ width:190px; height:30px; border:0px solid red; margin-left:4px;}	
+#ltouxians1{ width:60px; height:60px; border:0px solid #ccc; float:left; border-radius:100px; margin-top:5px;overflow:hidden;}
+#ltouxians2{ width:126px; height:70px; border:0px solid #ccc; float:left;}
+
+#flwosn1{ width:124px; height:25px; border:0px solid #ccc; margin-top:7px;}
+#flwosn2{ width:124px; height:25px; border:0px solid #ccc;}

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 设置开发模式 -->
+	<constant name="struts.devMode" value="false" />
+	<!-- 动态请求 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<!-- 处理乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 设置文件上传的大小 -->
+	<constant name="struts.multipart.maxSize" value="50000000"></constant>
+	<package name="theheadclass" namespace="/" extends="json-default">
+		<!-- 公共页面 -->
+		<global-results>
+			<result name="error">User/error.jsp</result>
+		</global-results>
+		<!-- 首页中文 -->
+		<action name="index" class="voice.com.action.IndexAction"
+			method="Indexfind">
+			<result name="indexs">index.jsp</result>
+		</action>
+
+		<!-- 副页面跳转 -->
+		<action name="indexpage" class="voice.com.action.IndexAction">
+			<result name="logincons">User/login.jsp</result>
+			<result name="jumpjylcs">page/process.jsp</result>
+			<result name="jumpfyfks">page/withpayment.jsp</result>
+			<result name="jumpcjwts">page/problem.jsp</result>
+			<result name="jumptsjys">page/suggest.jsp</result>
+			<result name="jumpgywms">page/aboutus.jsp</result>
+			<result name="Retrievepass">User/backpaswrd.jsp</result>
+		</action>
+
+		<action name="ranking" class="voice.com.action.IndexAction"
+			method="rankinglists">
+			<!-- 进入排行榜 -->
+			<result name="rankinglist">page/paihuang.jsp</result>
+		</action>
+
+		<!-- 进入聊天 -->
+		<action name="gochat" class="voice.com.action.UsersMessgeAction"
+			method="enterchat">
+			<result name="enterchats">User/usermessage.jsp</result>
+		</action>
+		<!-- 用户发消息 -->
+		<action name="usersmessge" class="voice.com.action.UsersMessgeAction"
+			method="usersendmessages">
+			<result name="usersendmessags" type="json">ms,newscont</result>
+		</action>
+		<!-- ajax动态查询管理员消息 -->
+		<action name="newsajax" class="voice.com.action.UsersMessgeAction"
+			method="ajaxnewsdd">
+			<result name="ajaxnewsadm" type="json">conts</result>
+		</action>
+
+
+		<!-- 用户类操作 -->
+		<action name="loginUsers" class="voice.com.action.UserAction">
+			<result name="listUsetType">User/registered.jsp</result>
+			<result name="loginrequest">User/login.jsp</result>
+			<result name="findyam" type="json">
+				<param name="includeProperties">
+					yanzm
+				</param>
+			</result>
+			<result name="requesyaz" type="json">
+				<param name="includeProperties">
+					zcbr
+				</param>
+			</result>
+			<result name="logincg" type="chain">index</result>
+			<result name="requestyhm" type="json">
+				<param name="includeProperties">
+					yamyhm
+				</param>
+			</result>
+			<!-- 注册返回的信息 -->
+			<result name="regerschgo">User/soswoo.jsp</result>
+			<!-- 找回密码验证 -->
+			<result name="rnlcsl">User/backpaswrd.jsp</result>
+			<result name="tzxzfs">User/youxiangzhaohuimima.jsp</result>
+			<result name="txmimac">User/szxingmima.jsp</result>
+			<result name="toytis">User/toyongtis.jsp</result>
+			<!-- 进入主页判断用户类型iuserhomepagepy -->
+			<result name="iuserhomepagerw">taskparty/members.jsp</result>
+			<result name="iuserhomepagepy">peiyingyuan/peiyingyuanzuye.jsp</result>
+			<!-- 主页修改密码 -->
+			<result name="updatepassmm" type="chain">passwordups</result>
+			<result name="updatepassmms" type="chain">passwordups</result>
+		</action>
+
+		<!-- 进入主页修改密码 -->
+		<action name="passwordups" class="voice.com.action.UserAction"
+			method="pageupadpass">
+			<result name="pagepassword">peiyingyuan/xiugaimima.jsp</result>
+			<result name="pagepasswordrwdfs">taskparty/rwfupadatepas.jsp</result>
+		</action>
+
+
+		<!-- 是否公开 -->
+		<action name="publicly" class="voice.com.action.UserAction"
+			method="publiclyuser">
+			<result name="publiclyus" type="chain">personalcenter</result>
+		</action>
+
+		<!-- 登陆验证码 -->
+		<action name="random" class="voice.com.action.RandomAction"
+			method="execute">
+			<!--<result name="SUCCESS" type="stream"> <param name="contentType">image/jpeg</param> 
+				<param name="inputName">outputinages</param> </result> -->
+		</action>
+
+		<!-- 退出session -->
+		<action name="exituser" class="voice.com.action.ExitAction">
+			<result name="exit" type="chain">index</result>
+		</action>
+		<!-- 配音员的操作 -->
+		<action name="voicemiets" class="voice.com.action.VoiceMaterialsAction">
+
+			<result name="uerupload" type="chain">voicfs</result>
+			<result name="uploadviceworks" type="chain">uplaodvoicezp</result>
+			<!--  <result name="updatewkzp" type="chain">workszsid</result> -->
+			<result name="updatewkzp" type="chain">worksgllist</result>
+			<result name="deleteworks" type="redirectAction">
+				<param name="actionName">worksgllist</param>
+				<param name="djydd">${djys}</param>
+			</result>
+		</action>
+		<!-- 个人中心 -->
+		<action name="personalcenter" class="voice.com.action.VoiceMaterialsAction"
+			method="Invoicematerial">
+			<result name="invoce">peiyingyuan/pyygerenzhongxin.jsp</result>
+			<result name="taskpary">taskparty/personalcenter.jsp</result>
+		</action>
+
+		<!-- 进入上传头像 -->
+		<action name="voicfs" class="voice.com.action.VoiceMaterialsAction"
+			method="fintoux">
+			<result name="usertx">peiyingyuan/pyyuploadtoux.jsp</result>
+			<result name="renwufang">taskparty/uploadtoux.jsp</result>
+		</action>
+		<!-- 进入资料完善 -->
+		<action name="upusertion" class="voice.com.action.VoiceMaterialsAction"
+			method="updateUser">
+			<result name="updateisUser">peiyingyuan/peiyinyuanjibenziliao.jsp</result>
+			<result name="rwfcemtes">taskparty/jibenzhiliao.jsp</result>
+			<!-- <result name="rwfcemtes">taskparty/userInfoComfirm.jsp</result> -->
+		</action>
+		<!-- 资料完善 -->
+		<action name="userupdate" class="voice.com.action.VoiceMaterialsAction"
+			method="updateUserwszl">
+			<!-- <result name="wsvoiccemtes" type="chain">upusertion</result> -->
+			<result name="wsvoiccemtes">User/dubberInfoComfirm.jsp</result> 
+			<result name="publishermaterial">taskparty/userInfoComfirm.jsp</result>
+		</action>
+		<!-- 进入上传作品页面 -->
+		<action name="uplaodvoicezp" class="voice.com.action.VoiceMaterialsAction"
+			method="uploadvicezp">
+			<result name="uplaodvicezps">peiyingyuan/shangcuanzuoping.jsp</result>
+		</action>
+		<!-- 进入作品管理 -->
+		<action name="worksgllist" class="voice.com.action.VoiceMaterialsAction"
+			method="workslist">
+			<result name="workslistcon">peiyingyuan/rwnulibiao.jsp</result>
+			<result name="wklnjosn" type="json">
+				listw
+			</result>
+		</action>
+		<!-- 根据ID展示作品 -->
+		<action name="workszsid" class="voice.com.action.VoiceMaterialsAction"
+			method="findworks">
+			<result name="findworksup">peiyingyuan/voicezpupdate.jsp</result>
+		</action>
+		<!-- 竞标中的任务列表 -->
+		<action name="voiceBiddings" class="voice.com.action.voiceplayerbiddingAction"
+			method="findBidding">
+			<result name="voiceBidding">peiyingyuan/Bidding.jsp</result>
+		</action>
+		<!-- 已完成的任务订单列表 -->
+		<action name="odersovers" class="voice.com.action.voiceplayerbiddingAction"
+			method="findOrderywc">
+			<result name="odersywc">peiyingyuan/havetheorder.jsp</result>
+			<result name="odersrwf">taskparty/rwfyiwanchenoders.jsp</result>
+		</action>
+
+
+		<!-- 删除竞标信息 -->
+		<action name="delepartpates" class="voice.com.action.voiceplayerbiddingAction">
+			<result name="deletepartpate" type="chain">voiceBiddings</result>
+			<!-- 查看我的竞标消息 -->
+			<result name="viewbiddings">page/biddinginformation.jsp</result>
+			<!-- 查看我竞标成功的任务的信息 -->
+			<result name="findthevoicedatas">page/hvoicedata.jsp</result>
+			<!-- tijiaochanping -->
+			<result name="submitproduct">page/submitproduct.jsp</result>
+			<!-- 任务方删除待付款的订单 -->
+			<result name="deleterwfoders" type="chain">unpaidtaskorder</result>
+			<!-- 查看消息 -->
+			<result name="themessage">peiyingyuan/messagedetail.jsp</result>
+		</action>
+		<!-- 配音员提交成品 -->
+		<action name="finishedadmes" class="voice.com.action.voiceplayerbiddingAction"
+			method="finishedproduct">
+			<result name="finishedproducs">page/tjsuccessfully.jsp</result>
+		</action>
+		<!-- 配音员的系统消息 -->
+		<action name="usersystemnews" class="voice.com.action.voiceplayerbiddingAction"
+			method="findsystemnews">
+			<result name="systemnews">peiyingyuan/pyysystemmessage.jsp</result>
+			<result name="systemnewsrwfs">taskparty/rwfmassges.jsp</result>
+		</action>
+
+		<!-- 任务方查看已付款的订单 -->
+		<action name="paymenthasbeenrw" class="voice.com.action.voiceplayerbiddingAction"
+			method="paymenthasbeen">
+			<result name="paymenthasbeens">taskparty/thegoods.jsp</result>
+		</action>
+		<!-- 任务方进入我的邀请列表 -->
+		<action name="invitat" class="voice.com.action.voiceplayerbiddingAction"
+			method="invitationtobid">
+			<result name="invitationtob">page/invitevoice.jsp</result>
+		</action>
+		<!-- 点击邀请 -->
+		<action name="goinvite" class="voice.com.action.voiceplayerbiddingAction"
+			method="Invitationtobids">
+			<result name="tiontobids">taskparty/yaoqingchenggon.jsp</result>
+		</action>
+		<!-- 竞标成功的任务列表 -->
+		<action name="Bidsuccess" class="voice.com.action.voiceplayerbiddingAction"
+			method="BidsuccessOrder">
+			<result name="Bidseccesoders">peiyingyuan/wonthebid.jsp</result>
+		</action>
+
+		<!-- 配音员评分 -->
+		<action name="voicescores" class="voice.com.action.voiceplayerbiddingAction"
+			method="voicescore">
+			<result name="vscore" type="json">jsonscoes</result>
+		</action>
+
+
+
+
+		<!-- 任务方============================================================== -->
+		<!-- 进入新增任务信息页面 -->
+		<action name="btenderaction" class="voice.com.action.VoiceMaterialsAction"
+			method="enterBtenderyem">
+			<result name="btenderEnter">taskparty/release.jsp</result>
+		</action>
+		<!-- 添加任务 -->
+		<action name="insertbtender" class="voice.com.action.BtenderAction">
+			<!--  <result name="btenderInsert" type="redirectAction"> -->
+				<result name="btenderInsert">taskparty/taskCompleteComfirm.jsp</result>
+			<!--  </result> -->
+		</action>
+
+
+		<action name="download" class="voice.com.action.DownloadAction">
+			<result name="success" type="stream">
+				<!-- 设定下载文件类型 -->
+				<param name="contentType">application/octet-stream;charset=iso-8859-1</param>
+				<!-- 设定下载文件名称 -->
+				<param name="contentDisposition">attachment;filename=${filename}</param>
+				<!-- 设定文件下载来源 -->
+				<param name="inputName">downloadFile</param>
+				<!-- 下载文件的缓冲大小 -->
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 进入我的任务列表 -->
+		<action name="btenlist" class="voice.com.action.BtenderAction"
+			method="taskpartylist">
+			<result name="taskparttlistaction">taskparty/thetasklist.jsp</result>
+			<result name="rewujson" type="json">
+				bten
+			</result>
+		</action>
+		<action name="betenbj" class="voice.com.action.BtenderAction"
+			method="updatebten">
+			<!-- 进入任务编辑 -->
+			<result name="upatebtens">taskparty/taskdetail.jsp</result>
+		</action>
+
+
+		<action name="betencaozuo" class="voice.com.action.BtenderAction">
+			<!-- 任务修改后 -->
+			<result name="updatebtenders" type="chain">betenbj</result>
+			<!-- 任务删除 -->
+			<result name="deletebtes" type="redirectAction">
+				<param name="actionName">btenlist</param>
+				<param name="rwdjys">${yema}</param>
+			</result>
+			<result name="jsonpartpate" type="json">
+				prlist
+			</result>
+		</action>
+
+
+		<!-- 配音员搜索页面 -->
+		<action name="voiceyindex" class="voice.com.action.pageAction"
+			method="thevoicefind">
+			<result name="thevoicelist">page/thevoice.jsp</result>
+			<result name="thevoicejson" type="json">
+				vlist
+			</result>
+		</action>
+
+		<!-- 配音员详细 -->
+		<action name="insvoiw" class="voice.com.action.pageAction"
+			method="inuservoiw">
+			<result name="inuservoiws">page/pydetailed.jsp</result>
+		</action>
+		<!-- 任务详细 -->
+		<action name="voiwtaskbt" class="voice.com.action.pageAction"
+			method="voiwtask">
+			<result name="viowtasks">page/renwuxiangqing.jsp</result>
+		</action>
+
+		<!-- 作品搜索页面 -->
+		<action name="worksvoiw" class="voice.com.action.pageAction"
+			method="viowlist">
+			<result name="vioworkslist">page/zuopin.jsp</result>
+			<result name="vioworksjson" type="json">
+				vowos
+			</result>
+		</action>
+		<!-- 作品详细 -->
+		<action name="worksdeta" class="voice.com.action.pageAction"
+			method="worksdetaileds">
+			<result name="worksdetailed">page/zuopinxx.jsp</result>
+		</action>
+
+		<!-- 任务搜索页面 -->
+		<action name="btendervoiw" class="voice.com.action.pageAction"
+			method="voiwbtenderlist">
+			<result name="voiwbtender">page/renwuzhuye.jsp</result>
+			<result name="voiwbtenderjson" type="json">
+				btenlist
+			</result>
+		</action>
+
+		<!-- 任务订单确认 -->
+		<action name="Confirmation" class="voice.com.action.OrdersAction"
+			method="orderConfirmation">
+			<result name="orderConfirmations">taskparty/addPartpate.jsp</result>
+		</action>
+		<!-- 付款操作 -->
+		<action name="paymento" class="voice.com.action.OrdersAction"
+			method="paymentoperation">
+			<result name="paymentoperations">taskparty/paywaitfor.jsp</result>
+		</action>
+		<!-- 查询交易表的支付状态 -->
+		<action name="findPaymens" class="voice.com.action.OrdersAction"
+			method="findPaymentstatus">
+			<result name="Paymentstatus" type="json">
+				zfid
+			</result>
+		</action>
+		<!-- 后台支付成功后页面自动跳转到成功页面 -->
+		<action name="paymentsuccessts" class="voice.com.action.OrdersAction"
+			method="paymentsuccessful">
+			<result name="paymentsuccess">taskparty/payforsuccess.jsp</result>
+		</action>
+
+		<!-- 进入任务方未支付订单页面 -->
+		<action name="unpaidtaskorder" class="voice.com.action.OrdersAction"
+			method="unpaid">
+			<result name="unpaidptedns">taskparty/weifukuan.jsp</result>
+		</action>
+		<!-- 进入任务方已支付订单页面 -->
+		<action name="conJumptaskorder" class="voice.com.action.OrdersAction"
+			method="Jumptaskorder">
+			<result name="Jumptaskorders">taskparty/jinxinzhong.jsp</result>
+		</action>
+
+
+
+
+
+
+		<!-- 参加竞标 -->
+		<action name="uplaodvofiles" class="voice.com.action.pageAction"
+			method="uploadsyin">
+			<result name="uploadjinbiao">page/renwutishi.jsp</result>
+		</action>
+
+	</package>
+	<include file="struts-english.xml"></include>
+	<include file="struts-isad.xml"></include>
+</struts>
